@@ -12,21 +12,24 @@
 > plain recency window is down at 15%.** Same memory, very different memory.
 > See the whole curve: `python -m kvsqueeze.eval`.
 
-Long-context inference has one villain, and it is the KV cache. It grows
-linearly with sequence length, it never shrinks, and it eats your GPU memory
-until you either buy a bigger card or start dropping tokens.
+Long-context inference has exactly one villain and it never RSVPs to the
+meeting where you decide it's a problem. The KV cache grows linearly with
+sequence length, it never shrinks, and it eats your GPU memory until you
+either buy a bigger card or start throwing tokens overboard like it's a
+sinking rowboat.
 
-Dropping tokens is the interesting option. But which ones? The dumb answer,
-keep the most recent and forget the rest, works great right up until the
-question depends on something you forgot. The research answer is to keep the
-tokens that actually matter, using signals like accumulated attention (H2O,
-Zhang et al. 2023) or protected "attention sink" tokens (StreamingLLM, Xiao et
-al. 2023).
+Throwing tokens overboard is the interesting part. But which ones? The dumb
+answer, keep the most recent and forget the rest, works great right up until
+the question depends on the one thing you already forgot, at which point your
+model confidently makes something up instead of admitting it doesn't know.
+The research answer is to keep the tokens that actually matter, using signals
+like accumulated attention (H2O, Zhang et al. 2023) or protected "attention
+sink" tokens (StreamingLLM, Xiao et al. 2023).
 
 kvsqueeze puts those policies side by side on a task where forgetting is
-measurable, and shows you exactly how far each one can compress before recall
-falls off a cliff. No GPU, no weights, no API keys. Just the policy logic and
-an honest metric.
+measurable instead of vibes, and shows you exactly how far each one can
+compress before recall falls off a cliff. No GPU, no weights, no API keys.
+Just the policy logic and a metric that doesn't let anyone lie to you.
 
 ---
 
@@ -47,11 +50,13 @@ needle-in-a-haystack survival vs cache budget (sequence=400 tokens)
      10%               0%              0%             12%
 ```
 
-Read it top to bottom and the story writes itself. Every policy uses the exact
-same memory at each row. A recency window looks fine at 80% and is already dead
-by 24%, because the moment the budget shrinks below the distance to the needle,
-the needle ages out and is gone. Heavy-hitter keeps compressing: it is still
-recalling at 10% of full cache, where the simple policies have flatlined.
+Read it top to bottom and the story writes itself. Every policy gets the exact
+same memory budget at each row, no favoritism. A recency window looks fine at
+80% and is flatlining by 24%, because the moment the budget shrinks below the
+distance to the needle, the needle ages out and is gone, no goodbye, no error
+message, just a model that's forgotten what you told it three paragraphs ago.
+Heavy-hitter keeps compressing: it's still recalling at 10% of full cache,
+long after the simple policies have given up and gone home.
 
 This is the same shape of result the H2O and StreamingLLM papers report. The
 difference is you can reproduce it on a laptop in under a second and read the
