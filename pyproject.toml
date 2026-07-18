@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "kvsqueeze"
+version = "0.1.0"
+description = "How much KV cache can you throw away before the model forgets? A reproducible benchmark of KV-cache eviction policies, no GPU required."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Ahmed Doghri" }]
+keywords = ["llm", "kv-cache", "long-context", "inference", "memory", "benchmark", "ai"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Developers",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "ruff>=0.6"]
+
+[project.urls]
+Homepage = "https://github.com/ahmeddoghri/kvsqueeze"
+
+[tool.hatch.build.targets.wheel]
+packages = ["kvsqueeze"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E9", "F", "I"]
