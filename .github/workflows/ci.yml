@@ -28,3 +28,5 @@ jobs:
         run: python examples/quickstart.py
       - name: Run benchmark
         run: python -m kvsqueeze.eval
+      - name: Run recency-blindness comparison
+        run: python -m kvsqueeze.eval_v2
