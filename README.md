@@ -2,7 +2,6 @@
 
 **How much KV cache can you throw away before the model forgets?**
 
-![CI](https://github.com/ahmeddoghri/kvsqueeze/actions/workflows/ci.yml/badge.svg)
 ![tests](https://img.shields.io/badge/tests-19%20passing-brightgreen)
 ![python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![deps](https://img.shields.io/badge/runtime%20deps-none-success)
