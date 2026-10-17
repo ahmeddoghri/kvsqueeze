@@ -2,10 +2,13 @@
 
 **How much KV cache can you throw away before the model forgets?**
 
-![tests](https://img.shields.io/badge/tests-19%20passing-brightgreen)
+[![tests](https://github.com/ahmeddoghri/kvsqueeze/actions/workflows/tests.yml/badge.svg)](https://github.com/ahmeddoghri/kvsqueeze/actions/workflows/tests.yml)
 ![python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![deps](https://img.shields.io/badge/runtime%20deps-none-success)
 ![license](https://img.shields.io/badge/license-MIT-black)
+[![case study](https://img.shields.io/badge/case%20study-adoghri.com-e0703e)](https://adoghri.com/project-14.html)
+
+![kvsqueeze](docs/cover.jpg)
 
 > **At 40% of full cache, a heavy-hitter policy holds 57% needle recall while a
 > plain recency window is down at 15%.** Same memory, very different memory.
