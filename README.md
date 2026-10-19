@@ -1,4 +1,4 @@
-# 🗜️ kvsqueeze
+# kvsqueeze
 
 **How much KV cache can you throw away before the model forgets?**
 
